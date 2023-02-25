@@ -229,13 +229,11 @@ def circle_pulse():
           bright += 0.004
           pixels.brightness=bright
           sleep(0.05)
-          print(bright)
         for b in range(25, 0, -1):
           pixels.fill(color)
           bright -= 0.004
           pixels.brightness=bright
           sleep(0.05)
-          print(bright)
 
 # use "with neopixel.NeoPixel(board.D'PIN', 'LED AMOUNT') as pixels:"
 # in order for leds going out after exiting the script. Otherwise they stay on
