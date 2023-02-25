@@ -31,7 +31,7 @@ g_col = 0
 b_col = 0
 pos = 0
 r = 0
-
+bright = 0.000
 
 # i decided to let the functions stay clustered instead of moving
 # them logically. This way you can see which LED-Functions use
@@ -221,23 +221,29 @@ def circle_fillandclear_b():
 
 # "breathing" brightness on all leds, cycles through colors
 def circle_pulse():
+      global bright
+      pixels.brightness=bright
       for color in COLORS:
         for a in range(0, 25, 1):
           pixels.fill(color)
-          pixels.brightness=a / 100
+          bright += 0.004
+          pixels.brightness=bright
           sleep(0.05)
+          print(bright)
         for b in range(25, 0, -1):
           pixels.fill(color)
-          pixels.brightness=b / 100
+          bright -= 0.004
+          pixels.brightness=bright
           sleep(0.05)
+          print(bright)
 
 # use "with neopixel.NeoPixel(board.D'PIN', 'LED AMOUNT') as pixels:"
 # in order for leds going out after exiting the script. Otherwise they stay on
 with neopixel.NeoPixel(board.D21, 16) as pixels:
-    pixels.brightness=0.03
+    pixels.brightness=0.045
     while True:
-        knight()
-        circle_nofill()
+#        knight()
+#        circle_nofill()
         circle_fill()
         circle_fillandclear()
         circle_fillandclear_b()
@@ -245,3 +251,4 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
         rnd_pastel()
         rainbow_cycle(0.01)
         circle_pulse()
+ 
