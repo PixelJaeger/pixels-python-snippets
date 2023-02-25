@@ -18,7 +18,7 @@ ORDER = neopixel.RGB       # some neopixel have a different order
 # the followinf variable is for the standard run&fill-light. the
 # variables are changeable and you can add more colors.
 # the format has to stay the same though. ie (0xFF00FF) for pink
-COLORS = (0xFF0000, 0x00FF00, 0x0000FF)
+COLORS = (0xFF0000, 0xFF007D, 0x7D00FF, 0x0000FF, 0x007DFF, 0x00FF7D, 0x00FF00, 0x7DFF00, 0xFF7D00)
 
 # defined variables
 c_wait = 1
