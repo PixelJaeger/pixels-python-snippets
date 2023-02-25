@@ -1,5 +1,5 @@
 """
-this is a small LED DEMO for use with the neopixel module
+this is a small LED library for use with the neopixel module
 invoke via 'from name_of_library.py import specific_funtion'
 or 'from name_of_library.py import *'
 """
@@ -177,7 +177,7 @@ def circle_fill():
           pixels.show()
           sleep(tick(a))
 
-#circle run where led's go off again
+# circle run where led's go off again
 def circle_nofill():
     for a in range(1, 10, 1):
       for color in COLORS:
@@ -194,15 +194,41 @@ def circle_nofill():
           sleep(tick(a))
           pixels.fill(0)
 
+# led fill until full and then remove until empty
+def circle_fillandclear():
+    for a in range(1, 10, 1):
+      for color in COLORS:
+        for i in range(num_pixels):
+          pixels[i] = color
+          pixels.show()
+          sleep(0.05)
+        for i in range(15, 0, -1):
+          pixels[i] = off
+          pixels.show()
+          sleep(0.05)
+
+# "breathing" brightness on all leds, cycles through colors
+def circle_pulse():
+      for color in COLORS:
+        for a in range(0, 25, 1):
+          pixels.fill(color)
+          pixels.brightness=a / 100
+          sleep(0.05)
+        for b in range(25, 0, -1):
+          pixels.fill(color)
+          pixels.brightness=b / 100
+          sleep(0.05)
+
 # use "with neopixel.NeoPixel(board.D'PIN', 'LED AMOUNT') as pixels:"
 # in order for leds going out after exiting the script. Otherwise they stay on
-with neopixel.NeoPixel(board.D21, 16) as pixels:   # change "board.D21, 16" to your PIN and LED amount!
+with neopixel.NeoPixel(board.D21, 16) as pixels:
     pixels.brightness=0.03
     while True:
-        rnd_pastel()
-        rnd_color()
         knight()
         circle_nofill()
-        rainbow_cycle(0.001)  # rainbow cycle with 1ms delay per step
         circle_fill()
-
+        circle_fillandclear()
+        rnd_color()
+        rnd_pastel()
+        rainbow_cycle()
+        circle_pulse()
