@@ -196,7 +196,7 @@ def circle_nofill():
 
 # use "with neopixel.NeoPixel(board.D'PIN', 'LED AMOUNT') as pixels:"
 # in order for leds going out after exiting the script. Otherwise they stay on
-with neopixel.NeoPixel(board.D21, 16) as pixels:
+with neopixel.NeoPixel(board.D21, 16) as pixels:   # change "board.D21, 16" to your PIN and LED amount!
     pixels.brightness=0.03
     while True:
         rnd_pastel()
