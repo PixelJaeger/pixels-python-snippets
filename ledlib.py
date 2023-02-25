@@ -249,4 +249,5 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
         rnd_pastel()
         rainbow_cycle(0.01)
         circle_pulse()
+        rnd_color()
  
