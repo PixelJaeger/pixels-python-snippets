@@ -1,5 +1,5 @@
 """
-this is a small LED library for use with the neopixel module
+this is a small LED DEMO for use with the neopixel module
 invoke via 'from name_of_library.py import specific_funtion'
 or 'from name_of_library.py import *'
 """
