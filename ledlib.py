@@ -7,6 +7,10 @@ or 'from name_of_library.py import *'
 import random, board, neopixel
 from time import sleep
 
+# importing for clean closure on reboot/shutdown otherwise
+# the LED will stay on until disconnected manually
+import sys, signal
+
 # LED variables
 # as long as invoke with:
 # "with neopixel.NeoPixel(board.D21, 16) as pixels:"
@@ -32,10 +36,12 @@ b_col = 0
 pos = 0
 r = 0
 bright = 0.000
+orig_bright = 0.045
 
 # i decided to let the functions stay clustered instead of moving
 # them logically. This way you can see which LED-Functions use
 # certain needed functions "random position", "random color" and "wait"-ticks)
+
 
 
 # pastel colors @ random led's
@@ -234,11 +240,26 @@ def circle_pulse():
           bright -= 0.004
           pixels.brightness=bright
           sleep(0.05)
+      pixels.brightness=orig_bright
+
+
+# handler for catching and acting upon shutdown/reboot
+pix_empty = neopixel.NeoPixel(board.D21, 16)
+
+def handler(signum = None, frame = None):
+    pix_empty.fill(0, 0, 0)
+    sleep(1)  #here check if process is done
+    print('done')
+    sys.exit(0)
+
+# catches reboot/shutdown signal
+for sig in [signal.SIGTERM, signal.SIGINT, signal.SIGHUP, signal.SIGQUIT]:
+    signal.signal(sig, handler)
 
 # use "with neopixel.NeoPixel(board.D'PIN', 'LED AMOUNT') as pixels:"
 # in order for leds going out after exiting the script. Otherwise they stay on
 with neopixel.NeoPixel(board.D21, 16) as pixels:
-    pixels.brightness=0.045
+    pixels.brightness=orig_bright
     while True:
 #        knight()
 #        circle_nofill()
@@ -247,7 +268,22 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
         circle_fillandclear_b()
         rnd_color()
         rnd_pastel()
-        rainbow_cycle(0.01)
         circle_pulse()
-        rnd_color()
- 
+        rainbow_cycle(0.01)
+
+"""
+possible functions:
+
+knight()
+circle_nofill
+circle_fill()
+circle_fillandclear()
+circle_fillandclear_b()
+rnd_color()
+rnd_pastel()
+circle_pulse()
+rainbow_cycle(0.01)
+
+"""
+
+
