@@ -19,6 +19,7 @@ ORDER = neopixel.RGB       # some neopixel have a different order
 # variables are changeable and you can add more colors.
 # the format has to stay the same though. ie (0xFF00FF) for pink
 COLORS = (0xFF0000, 0xFF007D, 0x7D00FF, 0x0000FF, 0x007DFF, 0x00FF7D, 0x00FF00, 0x7DFF00, 0xFF7D00)
+off = (0x000000)
 
 # defined variables
 c_wait = 1
@@ -93,7 +94,6 @@ def knight():
     for i in range(1, 10, 1):
         ############ Left to Right ##################  
         for x in range(0, 14, 1):
-
             pixels[x+1] = (255, 0, 0)
             sleep(short)
             pixels[x] = (255, 0, 0)
@@ -108,9 +108,8 @@ def knight():
             sleep(longer)
             pixels[x+2] = (0, 0, 0)
         sleep(0.1)
-    
         ############ Left to Right ##################  
-        for x in range(12, 0, -1):
+        for x in range(13, 0, -1):
             pixels[x+1] = (255, 0, 0)
             sleep(longer)
             pixels[x] = (255, 0, 0)
@@ -163,14 +162,14 @@ def tick(c_wait):
   return(val)
 
 def circle_fill():
-    for a in range(1, 10, 1):
+    for a in range(1, 5, 1):
       for color in COLORS:
         for i in range(num_pixels):
           pixels[i] = color
           pixels.show()
           sleep(tick(a))
 
-    for a in range(10, 1, -1):
+    for a in range(5, 1, -1):
       for color in COLORS:
         for i in range(num_pixels):
           pixels[i] = color
@@ -179,14 +178,14 @@ def circle_fill():
 
 # circle run where led's go off again
 def circle_nofill():
-    for a in range(1, 10, 1):
+    for a in range(1, 5, 1):
       for color in COLORS:
         for i in range(num_pixels):
           pixels[i] = color
           pixels.show()
           sleep(tick(a))
           pixels.fill(0)
-    for a in range(10, 1, -1):
+    for a in range(5, 1, -1):
       for color in COLORS:
         for i in range(num_pixels):
           pixels[i] = color
@@ -196,13 +195,26 @@ def circle_nofill():
 
 # led fill until full and then remove until empty
 def circle_fillandclear():
-    for a in range(1, 10, 1):
+    for a in range(1, 3, 1):
       for color in COLORS:
         for i in range(num_pixels):
           pixels[i] = color
           pixels.show()
           sleep(0.05)
         for i in range(15, 0, -1):
+          pixels[i] = off
+          pixels.show()
+          sleep(0.05)
+
+# led fill until full and then remove until empty
+def circle_fillandclear_b():
+    for a in range(1, 3, 1):
+      for color in COLORS:
+        for i in range(num_pixels):
+          pixels[i] = color
+          pixels.show()
+          sleep(0.05)
+        for i in range(0, 16, 1):
           pixels[i] = off
           pixels.show()
           sleep(0.05)
@@ -228,7 +240,8 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
         circle_nofill()
         circle_fill()
         circle_fillandclear()
+        circle_fillandclear_b()
         rnd_color()
         rnd_pastel()
-        rainbow_cycle()
+        rainbow_cycle(0.01)
         circle_pulse()
