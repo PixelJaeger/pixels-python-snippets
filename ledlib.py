@@ -11,12 +11,12 @@ from time import sleep
 # the LED will stay on until disconnected manually
 import sys, signal
 
-# LED variables
-# as long as invoke with:
-# "with neopixel.NeoPixel(board.D21, 16) as pixels:"
-# following lines are not needed
 # pixel_pin = board.D21    # which GPIO-Pin is used
+
 # num_pixels = 16          # how many LEDs are on the neopixel
+
+
+
 ORDER = neopixel.RGB       # some neopixel have a different order
 
 # the followinf variable is for the standard run&fill-light. the
@@ -53,6 +53,7 @@ def rgb_val(r):
   r = random.randrange(25, 100, 1)
   return(r)
 
+# pastel colors @ random led's
 def rnd_pastel():
     for i in range(1, 100, 1):
       pixels.brightness=0.03
@@ -95,7 +96,8 @@ def rnd_color():
       pixels[pos] = (255, 125 ,0)
       sleep(0.05)
 
-# Knight-Rider Style Lauflicht
+# Knight-Rider Style running light
+# at the moment still kinda broken
 def knight():
     for i in range(1, 10, 1):
         ############ Left to Right ##################  
@@ -242,6 +244,88 @@ def circle_pulse():
           sleep(0.05)
       pixels.brightness=orig_bright
 
+# 4 leds across each other going in a circle
+# changing colors each position
+def fourpoint():
+  global a, b, c, d
+  a = -1
+  b = 3
+  c = 7
+  d = 11
+  for loop in range(1, 15, 1):
+    for color in COLORS:
+      a += 1
+      b += 1
+      c += 1
+      d += 1
+      if a == 16:
+       a -= 16
+      if b == 16:
+       b -= 16
+      if c == 16:
+       c -= 16
+      if d == 16:
+       d -= 16
+      pixels[a] = color
+      pixels[b] = color
+      pixels[c] = color
+      pixels[d] = color
+      sleep(tick(loop))
+      pixels.fill(0)
+  for loop in range(15, 1, -1):
+    for color in COLORS:
+      a += 1
+      b += 1
+      c += 1
+      d += 1
+      if a == 16:
+       a -= 16
+      if b == 16:
+       b -= 16
+      if c == 16:
+       c -= 16
+      if d == 16:
+       d -= 16
+      pixels[a] = color
+      pixels[b] = color
+      pixels[c] = color
+      pixels[d] = color
+      sleep(tick(loop))
+      pixels.fill(0)
+
+# 2 leds across each other going in a circle
+# changing colors each position
+def twopoint():
+  global a, c
+  a = -1
+  c = 7
+  for loop in range(1, 15, 1):
+    for color in COLORS:
+      a += 1
+      c += 1
+      if a == 16:
+       a -= 16
+      if c == 16:
+       c -= 16
+      pixels[a] = color
+      pixels[c] = color
+      sleep(tick(loop))
+      pixels.fill(0)
+  for loop in range(15, 1, -1):
+    for color in COLORS:
+      a += 1
+      c += 1
+      if a == 16:
+       a -= 16
+      if c == 16:
+       c -= 16
+      pixels[a] = color
+      pixels[c] = color
+      sleep(tick(loop))
+      pixels.fill(0)
+
+
+
 
 # handler for catching and acting upon shutdown/reboot
 pix_empty = neopixel.NeoPixel(board.D21, 16)
@@ -261,8 +345,16 @@ for sig in [signal.SIGTERM, signal.SIGINT, signal.SIGHUP, signal.SIGQUIT]:
 with neopixel.NeoPixel(board.D21, 16) as pixels:
     pixels.brightness=orig_bright
     while True:
+
+
+############################################
+# comment / uncomment the functions below  #
+# depending on your liking                 #
+############################################
 #        knight()
 #        circle_nofill()
+        twopoint()
+        fourpoint()
         circle_fill()
         circle_fillandclear()
         circle_fillandclear_b()
@@ -270,20 +362,4 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
         rnd_pastel()
         circle_pulse()
         rainbow_cycle(0.01)
-
-"""
-possible functions:
-
-knight()
-circle_nofill
-circle_fill()
-circle_fillandclear()
-circle_fillandclear_b()
-rnd_color()
-rnd_pastel()
-circle_pulse()
-rainbow_cycle(0.01)
-
-"""
-
 
