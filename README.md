@@ -1,6 +1,8 @@
 # neopixel-python-demo
 this repo is for programming neopixel led-rings and/or led-strips on Python.<br/>
-tested on python 3.9.2<br/>
+tested on python 3.9.2 and an 16 LED NeoPixel Ring.<br/>
+<br/>
+<br/>
 <br/>
 <b>ledlib.py</b><br/>
 the main file. it contains all functions needed.<br/>
