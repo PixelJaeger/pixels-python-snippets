@@ -13,9 +13,7 @@ import sys, signal
 
 # pixel_pin = board.D21    # which GPIO-Pin is used
 
-# num_pixels = 16          # how many LEDs are on the neopixel
-
-
+pixel_count = 16  # Change this to your "LED-Count -1"
 
 ORDER = neopixel.RGB       # some neopixel have a different order
 
@@ -38,20 +36,18 @@ r = 0
 bright = 0.000
 orig_bright = 0.045
 
-# i decided to let the functions stay clustered instead of moving
-# them logically. This way you can see which LED-Functions use
-# certain needed functions "random position", "random color" and "wait"-ticks)
-
-
-
-# pastel colors @ random led's
 def rand_pos(r_pos):
-  r_pos = random.randrange(0, 16, 1)
+  r_pos = random.randrange(0, pixel_count, 1)
   return(r_pos)
 
 def rgb_val(r):
   r = random.randrange(25, 100, 1)
   return(r)
+
+def tick(c_wait):
+  val = c_wait / 100
+  return(val)
+
 
 # pastel colors @ random led's
 def rnd_pastel():
@@ -96,45 +92,7 @@ def rnd_color():
       pixels[pos] = (255, 125 ,0)
       sleep(0.05)
 
-# Knight-Rider Style running light
-# at the moment still kinda broken
-def knight():
-    for i in range(1, 10, 1):
-        ############ Left to Right ##################  
-        for x in range(0, 14, 1):
-            pixels[x+1] = (255, 0, 0)
-            sleep(short)
-            pixels[x] = (255, 0, 0)
-            sleep(longer)
-            pixels[x+1] = (255, 0, 0)
-            sleep(longer)
-            pixels[x+2] = (255, 0, 0)
-            sleep(longer)
-            pixels[x] = (0, 0, 0)
-            sleep(longer)
-            pixels[x+1] = (255, 0, 0)
-            sleep(longer)
-            pixels[x+2] = (0, 0, 0)
-        sleep(0.1)
-        ############ Left to Right ##################  
-        for x in range(13, 0, -1):
-            pixels[x+1] = (255, 0, 0)
-            sleep(longer)
-            pixels[x] = (255, 0, 0)
-            sleep(longer)
-            pixels[x+1] = (255, 0, 0)
-            sleep(longer)
-            pixels[x+2] = (255, 0, 0)
-            sleep(longer)
-            pixels[x] = (0, 0, 0)
-            sleep(longer)
-            pixels[x+1] = (255, 0, 0)
-            sleep(longer)
-            pixels[x+2] = (0, 0, 0)
-        sleep(0.5)
-
 # rainbow
-num_pixels = 16
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
@@ -158,28 +116,24 @@ def wheel(pos):
 
 def rainbow_cycle(rain_wait):
     for j in range(255):
-        for i in range(num_pixels):
-            pixel_index = (i * 256 // num_pixels) + j
+        for i in range(pixel_count):
+            pixel_index = (i * 256 // pixel_count) + j
             pixels[i] = wheel(pixel_index & 255)
         pixels.show()
         sleep(rain_wait)
 
 # circle run where led's stay on
-def tick(c_wait):
-  val = c_wait / 100
-  return(val)
-
 def circle_fill():
     for a in range(1, 5, 1):
       for color in COLORS:
-        for i in range(num_pixels):
+        for i in range(pixel_count):
           pixels[i] = color
           pixels.show()
           sleep(tick(a))
 
     for a in range(5, 1, -1):
       for color in COLORS:
-        for i in range(num_pixels):
+        for i in range(pixel_count):
           pixels[i] = color
           pixels.show()
           sleep(tick(a))
@@ -188,14 +142,14 @@ def circle_fill():
 def circle_nofill():
     for a in range(1, 5, 1):
       for color in COLORS:
-        for i in range(num_pixels):
+        for i in range(pixel_count):
           pixels[i] = color
           pixels.show()
           sleep(tick(a))
           pixels.fill(0)
     for a in range(5, 1, -1):
       for color in COLORS:
-        for i in range(num_pixels):
+        for i in range(pixel_count):
           pixels[i] = color
           pixels.show()
           sleep(tick(a))
@@ -205,7 +159,7 @@ def circle_nofill():
 def circle_fillandclear():
     for a in range(1, 3, 1):
       for color in COLORS:
-        for i in range(num_pixels):
+        for i in range(pixel_count):
           pixels[i] = color
           pixels.show()
           sleep(0.05)
@@ -218,7 +172,7 @@ def circle_fillandclear():
 def circle_fillandclear_b():
     for a in range(1, 3, 1):
       for color in COLORS:
-        for i in range(num_pixels):
+        for i in range(pixel_count):
           pixels[i] = color
           pixels.show()
           sleep(0.05)
@@ -342,7 +296,7 @@ for sig in [signal.SIGTERM, signal.SIGINT, signal.SIGHUP, signal.SIGQUIT]:
 
 # use "with neopixel.NeoPixel(board.D'PIN', 'LED AMOUNT') as pixels:"
 # in order for leds going out after exiting the script. Otherwise they stay on
-with neopixel.NeoPixel(board.D21, 16) as pixels:
+with neopixel.NeoPixel(board.D21, pixel_count) as pixels:
     pixels.brightness=orig_bright
     while True:
 
@@ -351,7 +305,7 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
 # comment / uncomment the functions below  #
 # depending on your liking                 #
 ############################################
-#        knight()
+
 #        circle_nofill()
         twopoint()
         fourpoint()
@@ -362,4 +316,3 @@ with neopixel.NeoPixel(board.D21, 16) as pixels:
         rnd_pastel()
         circle_pulse()
         rainbow_cycle(0.01)
-
