@@ -1,7 +1,9 @@
 """
 this is a small LED library for use with the neopixel module
 invoke via 'from name_of_library.py import specific_funtion'
-or 'from name_of_library.py import *'
+or 'from name_of_library.py import *' or just run this file.
+It has to run as root though!
+ie.: sudo python3 this_script.py
 """
 # importing necessary stuff
 import random, board, neopixel
@@ -26,19 +28,10 @@ off = (0x000000)
 
 # defined variables
 c_wait = 1
-short = 0.005
-longer = 0.009
-r_pos = 0
-r_col = 0
-g_col = 0
-b_col = 0
-pos = 0
-r = 0
+r_pos = r_col = g_col = b_col = pos = r = 0
+p_one = m_one = norm_ = 0
 bright = 0.000
 orig_bright = 0.045
-p_one = 0
-m_one = 0
-norm_ = 0
 
 def rand_pos(r_pos):
   r_pos = random.randrange(0, pixel_count, 1)
@@ -286,40 +279,39 @@ def twopoint():
 # changing colors each position
 def chase():
   global p_one, m_one, norm_, col_dim
-  for r in range(1, 15, 1):
-    for color in range(0, 8, 1):
-      for loop in range(1, 10, 1):
-        for i in range(pixel_count):
-          m_one=i-1
-          norm_=i
-          p_one=i+1
-          if m_one < 0:
-            m_one = 15
-          if norm_ > 15:
-            norm_ = 0
-          if p_one > 15:
-            p_one = 0
-          pixels.fill(0)
-          pixels[m_one] = col_dim[color]
-          pixels[norm_] = COLORS[color]
-          pixels[p_one] = col_dim[color]
-          sleep(tick(loop))
-      for loop in range(10, 1, -1):
-        for i in range(pixel_count):
-          m_one=i-1
-          norm_=i
-          p_one=i+1
-          if m_one < 0:
-            m_one = 15
-          if norm_ > 15:
-            norm_ = 0
-          if p_one > 15:
-            p_one = 0
-          pixels.fill(0)
-          pixels[m_one] = col_dim[color]
-          pixels[norm_] = COLORS[color]
-          pixels[p_one] = col_dim[color]
-          sleep(tick(loop))
+  for color in range(0, 8, 1):
+    for loop in range(1, 10, 1):
+      for i in range(pixel_count):
+        m_one=i-1
+        norm_=i
+        p_one=i+1
+        if m_one < 0:
+          m_one = 15
+        if norm_ > 15:
+          norm_ = 0
+        if p_one > 15:
+          p_one = 0
+        pixels.fill(0)
+        pixels[m_one] = col_dim[color]
+        pixels[norm_] = COLORS[color]
+        pixels[p_one] = col_dim[color]
+        sleep(tick(loop))
+    for loop in range(10, 1, -1):
+      for i in range(pixel_count):
+        m_one=i-1
+        norm_=i
+        p_one=i+1
+        if m_one < 0:
+          m_one = 15
+        if norm_ > 15:
+          norm_ = 0
+        if p_one > 15:
+          p_one = 0
+        pixels.fill(0)
+        pixels[m_one] = col_dim[color]
+        pixels[norm_] = COLORS[color]
+        pixels[p_one] = col_dim[color]
+        sleep(tick(loop))
 
 # handler for catching and acting upon shutdown/reboot
 pix_empty = neopixel.NeoPixel(board.D21, 16)
@@ -357,3 +349,6 @@ with neopixel.NeoPixel(board.D21, pixel_count) as pixels:
         rnd_pastel()
         circle_pulse()
         rainbow_cycle(0.01)
+
+
+
