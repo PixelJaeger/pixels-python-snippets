@@ -36,6 +36,9 @@ pos = 0
 r = 0
 bright = 0.000
 orig_bright = 0.045
+p_one = 0
+m_one = 0
+norm_ = 0
 
 def rand_pos(r_pos):
   r_pos = random.randrange(0, pixel_count, 1)
@@ -282,173 +285,41 @@ def twopoint():
 # 2 leds across each other going in a circle
 # changing colors each position
 def chase():
-  global col_dim
-  for loop in range(1, 2, 1):
+  global p_one, m_one, norm_, col_dim
+  for r in range(1, 15, 1):
     for color in range(0, 8, 1):
-      for i in range(1, 15, 1):
-        pixels.fill(0)
-        pixels[15] = col_dim[color]
-        pixels[0] = COLORS[color]
-        pixels[1] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[0] = col_dim[color]
-        pixels[1] = COLORS[color]
-        pixels[2] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[1] = col_dim[color]
-        pixels[2] = COLORS[color]
-        pixels[3] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[2] = col_dim[color]
-        pixels[3] = COLORS[color]
-        pixels[4] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[3] = col_dim[color]
-        pixels[4] = COLORS[color]
-        pixels[5] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[4] = col_dim[color]
-        pixels[5] = COLORS[color]
-        pixels[6] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[5] = col_dim[color]
-        pixels[6] = COLORS[color]
-        pixels[7] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[6] = col_dim[color]
-        pixels[7] = COLORS[color]
-        pixels[8] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[7] = col_dim[color]
-        pixels[8] = COLORS[color]
-        pixels[9] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[8] = col_dim[color]
-        pixels[9] = COLORS[color]
-        pixels[10] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[9] = col_dim[color]
-        pixels[10] = COLORS[color]
-        pixels[11] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[10] = col_dim[color]
-        pixels[11] = COLORS[color]
-        pixels[12] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[11] = col_dim[color]
-        pixels[12] = COLORS[color]
-        pixels[13] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[12] = col_dim[color]
-        pixels[13] = COLORS[color]
-        pixels[14] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[13] = col_dim[color]
-        pixels[14] = COLORS[color]
-        pixels[15] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[14] = col_dim[color]
-        pixels[15] = COLORS[color]
-        pixels[0] = col_dim[color]
-        sleep(tick(i))
-      for i in range(15, 1, -1):
-        pixels.fill(0)
-        pixels[15] = col_dim[color]
-        pixels[0] = COLORS[color]
-        pixels[1] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[0] = col_dim[color]
-        pixels[1] = COLORS[color]
-        pixels[2] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[1] = col_dim[color]
-        pixels[2] = COLORS[color]
-        pixels[3] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[2] = col_dim[color]
-        pixels[3] = COLORS[color]
-        pixels[4] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[3] = col_dim[color]
-        pixels[4] = COLORS[color]
-        pixels[5] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[4] = col_dim[color]
-        pixels[5] = COLORS[color]
-        pixels[6] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[5] = col_dim[color]
-        pixels[6] = COLORS[color]
-        pixels[7] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[6] = col_dim[color]
-        pixels[7] = COLORS[color]
-        pixels[8] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[7] = col_dim[color]
-        pixels[8] = COLORS[color]
-        pixels[9] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[8] = col_dim[color]
-        pixels[9] = COLORS[color]
-        pixels[10] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[9] = col_dim[color]
-        pixels[10] = COLORS[color]
-        pixels[11] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[10] = col_dim[color]
-        pixels[11] = COLORS[color]
-        pixels[12] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[11] = col_dim[color]
-        pixels[12] = COLORS[color]
-        pixels[13] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[12] = col_dim[color]
-        pixels[13] = COLORS[color]
-        pixels[14] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[13] = col_dim[color]
-        pixels[14] = COLORS[color]
-        pixels[15] = col_dim[color]
-        sleep(tick(i))
-        pixels.fill(0)
-        pixels[14] = col_dim[color]
-        pixels[15] = COLORS[color]
-        pixels[0] = col_dim[color]
-        sleep(tick(i))
-
-
+      for loop in range(1, 10, 1):
+        for i in range(pixel_count):
+          m_one=i-1
+          norm_=i
+          p_one=i+1
+          if m_one < 0:
+            m_one = 15
+          if norm_ > 15:
+            norm_ = 0
+          if p_one > 15:
+            p_one = 0
+          pixels.fill(0)
+          pixels[m_one] = col_dim[color]
+          pixels[norm_] = COLORS[color]
+          pixels[p_one] = col_dim[color]
+          sleep(tick(loop))
+      for loop in range(10, 1, -1):
+        for i in range(pixel_count):
+          m_one=i-1
+          norm_=i
+          p_one=i+1
+          if m_one < 0:
+            m_one = 15
+          if norm_ > 15:
+            norm_ = 0
+          if p_one > 15:
+            p_one = 0
+          pixels.fill(0)
+          pixels[m_one] = col_dim[color]
+          pixels[norm_] = COLORS[color]
+          pixels[p_one] = col_dim[color]
+          sleep(tick(loop))
 
 # handler for catching and acting upon shutdown/reboot
 pix_empty = neopixel.NeoPixel(board.D21, 16)
