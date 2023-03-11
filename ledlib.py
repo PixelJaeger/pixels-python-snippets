@@ -21,6 +21,7 @@ ORDER = neopixel.RGB       # some neopixel have a different order
 # variables are changeable and you can add more colors.
 # the format has to stay the same though. ie (0xFF00FF) for pink
 COLORS = (0xFF0000, 0xFF007D, 0x7D00FF, 0x0000FF, 0x007DFF, 0x00FF7D, 0x00FF00, 0x7DFF00, 0xFF7D00)
+col_dim= (0x280000, 0x28001A, 0x1A0028, 0x000028, 0x001A28, 0x00281A, 0x002800, 0x1A2800, 0x281A00)
 off = (0x000000)
 
 # defined variables
@@ -278,6 +279,174 @@ def twopoint():
       sleep(tick(loop))
       pixels.fill(0)
 
+# 2 leds across each other going in a circle
+# changing colors each position
+def chase():
+  global col_dim
+  for loop in range(1, 2, 1):
+    for color in range(0, 8, 1):
+      for i in range(1, 15, 1):
+        pixels.fill(0)
+        pixels[15] = col_dim[color]
+        pixels[0] = COLORS[color]
+        pixels[1] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[0] = col_dim[color]
+        pixels[1] = COLORS[color]
+        pixels[2] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[1] = col_dim[color]
+        pixels[2] = COLORS[color]
+        pixels[3] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[2] = col_dim[color]
+        pixels[3] = COLORS[color]
+        pixels[4] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[3] = col_dim[color]
+        pixels[4] = COLORS[color]
+        pixels[5] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[4] = col_dim[color]
+        pixels[5] = COLORS[color]
+        pixels[6] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[5] = col_dim[color]
+        pixels[6] = COLORS[color]
+        pixels[7] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[6] = col_dim[color]
+        pixels[7] = COLORS[color]
+        pixels[8] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[7] = col_dim[color]
+        pixels[8] = COLORS[color]
+        pixels[9] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[8] = col_dim[color]
+        pixels[9] = COLORS[color]
+        pixels[10] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[9] = col_dim[color]
+        pixels[10] = COLORS[color]
+        pixels[11] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[10] = col_dim[color]
+        pixels[11] = COLORS[color]
+        pixels[12] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[11] = col_dim[color]
+        pixels[12] = COLORS[color]
+        pixels[13] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[12] = col_dim[color]
+        pixels[13] = COLORS[color]
+        pixels[14] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[13] = col_dim[color]
+        pixels[14] = COLORS[color]
+        pixels[15] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[14] = col_dim[color]
+        pixels[15] = COLORS[color]
+        pixels[0] = col_dim[color]
+        sleep(tick(i))
+      for i in range(15, 1, -1):
+        pixels.fill(0)
+        pixels[15] = col_dim[color]
+        pixels[0] = COLORS[color]
+        pixels[1] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[0] = col_dim[color]
+        pixels[1] = COLORS[color]
+        pixels[2] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[1] = col_dim[color]
+        pixels[2] = COLORS[color]
+        pixels[3] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[2] = col_dim[color]
+        pixels[3] = COLORS[color]
+        pixels[4] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[3] = col_dim[color]
+        pixels[4] = COLORS[color]
+        pixels[5] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[4] = col_dim[color]
+        pixels[5] = COLORS[color]
+        pixels[6] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[5] = col_dim[color]
+        pixels[6] = COLORS[color]
+        pixels[7] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[6] = col_dim[color]
+        pixels[7] = COLORS[color]
+        pixels[8] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[7] = col_dim[color]
+        pixels[8] = COLORS[color]
+        pixels[9] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[8] = col_dim[color]
+        pixels[9] = COLORS[color]
+        pixels[10] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[9] = col_dim[color]
+        pixels[10] = COLORS[color]
+        pixels[11] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[10] = col_dim[color]
+        pixels[11] = COLORS[color]
+        pixels[12] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[11] = col_dim[color]
+        pixels[12] = COLORS[color]
+        pixels[13] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[12] = col_dim[color]
+        pixels[13] = COLORS[color]
+        pixels[14] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[13] = col_dim[color]
+        pixels[14] = COLORS[color]
+        pixels[15] = col_dim[color]
+        sleep(tick(i))
+        pixels.fill(0)
+        pixels[14] = col_dim[color]
+        pixels[15] = COLORS[color]
+        pixels[0] = col_dim[color]
+        sleep(tick(i))
 
 
 
@@ -307,6 +476,7 @@ with neopixel.NeoPixel(board.D21, pixel_count) as pixels:
 ############################################
 
 #        circle_nofill()
+        chase()
         twopoint()
         fourpoint()
         circle_fill()
