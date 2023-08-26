@@ -1,11 +1,11 @@
-# neopixel-python-demo
-this repo is for programming neopixel led-rings and/or led-strips on Python.<br/>
-tested on python 3.9.2 and an 16 LED NeoPixel Ring.<br/>
+# Pixels Python Snippets
+this repo is for programming neopixel led-rings, DHT22 and TM1637.<br/>
+might be expanded if i get my hands on new hardware<br/>
 <br/>
 <br/>
 <br/>
 <b>ledlib.py</b><br/>
-the main file. it contains all functions needed.<br/>
+File for a neopixel 16 LED ring<br/>
 you can change the led-functions ad the bottom of<br/>
 the file to your liking.<br/>
 i.e.: change the order of the demos.<br/>
