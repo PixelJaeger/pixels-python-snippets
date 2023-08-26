@@ -21,3 +21,16 @@ as mentioned within that file:<br/>
 use this if you ran the script automatically @ bootup<br/>
 and want/need to kill it. I do not know if it will<br/>
 work for you, so use it at your own risk.<br/>
+<br/>
+<b>nuka_display.py</b><br/>
+Temperature and Humidity Displayed on a 7 segment 4 Digit Display-module<br/>
+Has also Scrolltext (needs to be uncommented in order to work<br/>
+Uses input from a DHT22 Temperature/Humidity Sensor<br/>
+<br/>
+<b>nuka_led.py</b><br/>
+Small LED script for my 5 UV-LED "Nuka Cola Quantum" Bottle<br/>
+Uses "Argsparse" for startparameters <br/>
+Use "nuka_led.py -h" for more info.<br/>
+<br/>
+
+
