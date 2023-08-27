@@ -1,8 +1,22 @@
+#!/usr/bin/python3
 import time
 import board
 import adafruit_dht
 import tm1637
 from time import localtime
+import argparse, numpy
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('-c', '--clock', action='store_true', help="shows current time")
+parser.add_argument('-t', '--temperature', action='store_true', help="displays current temperature and humidity")
+parser.add_argument('-b', '--both', action='store_true', help="displays time, temperature and humidity")
+#parser.add_argument('integers', metavar='N', type=float, nargs='+', help='time in seconds between mode changes')
+parser.add_argument('-d', '--debug', action='store_true', help="test")
+
+args = parser.parse_args()
+
+#delay = float(args.integers[0])
 
 tm = tm1637.TM1637(clk=26, dio=19)                              # clk and dio need to be changes according to you pin usage
 dhtDevice = adafruit_dht.DHT22(board.D17, use_pulseio=False)    # "(board.D15) needs to be changed according to your pin usage)
@@ -40,33 +54,14 @@ def temp_humi():
     time.sleep(3)
     tm.show('    ')                                     # clear LED Display
     tm.write([0, 0 , 0 , 116])                                     
-    tm.show(humi)                                       # shot Humidity-String on LED Display
-    time.sleep(3)
+    tm.show(humi)                                       # show Humidity-String on LED Display
+    time.sleep(2)
 
-def scroll_text():
-     tm.scroll('Nuka Cola Quantum')
 
-def scroll_temp():
-    global temperature_c_s
-    global humidity_s
-    temperature_c_s = dhtDevice.temperature               # get temperature from sensor
-    humidity_s = dhtDevice.humidity                       # get humidity from sensor
-    tempe_s = str(temperature_c_s)                          # convert to string
-    humi_s = str(humidity_s)
-    tempe_s = tempe_s[:2]                                   # only use first to characters of string
-    humi_s = humi_s[:2]
-    tempe_s = tempe_s+'*C'                                  # append "*C" to string
-    scroll_text = tempe_s + '    ' + humi_s + ' h'
-    tm.scroll(scroll_text, 500)
-
-while True:
+if args.clock:
+    while True:
         try:
-            temp_humi()
             clock_time()
-            scroll_temp()
-            clock_time()
-            #scroll_text()
-
         except RuntimeError as error:
             #print(error.args[0])                   #uncomment for error messages in console
             time.sleep(1)
@@ -77,3 +72,37 @@ while True:
             time.sleep(1)
             continue
         time.sleep(1)
+
+if args.temperature:
+    while True:
+        try:
+            temp_humi()
+        except RuntimeError as error:
+            #print(error.args[0])                   #uncomment for error messages in console
+            time.sleep(1)
+            continue
+        except Exception as error:
+            #dhtDevice.exit()                       #drops device in case of "big" errors
+            #raise error                            #shows "big" errors in the console
+            time.sleep(1)
+            continue
+        time.sleep(1)
+
+if args.both:
+    while True:
+        try:
+            clock_time()
+            temp_humi()
+        except RuntimeError as error:
+            #print(error.args[0])                   #uncomment for error messages in console
+            time.sleep(1)
+            continue
+        except Exception as error:
+            #dhtDevice.exit()                       #drops device in case of "big" errors
+            #raise error                            #shows "big" errors in the console
+            time.sleep(1)
+            continue
+        time.sleep(1)
+
+if args.debug:
+    print('Delayvalue =', int(args.integers[0]))
