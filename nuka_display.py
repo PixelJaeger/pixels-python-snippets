@@ -1,22 +1,18 @@
 #!/usr/bin/python3
 import time
 import board
-import adafruit_dht
-import tm1637
+import adafruit_dht  # type: ignore
+import tm1637  # type: ignore
 from time import localtime
 import argparse, numpy
 
 parser = argparse.ArgumentParser()
-
 parser.add_argument('-c', '--clock', action='store_true', help="shows current time")
 parser.add_argument('-t', '--temperature', action='store_true', help="displays current temperature and humidity")
 parser.add_argument('-b', '--both', action='store_true', help="displays time, temperature and humidity")
-#parser.add_argument('integers', metavar='N', type=float, nargs='+', help='time in seconds between mode changes')
 parser.add_argument('-d', '--debug', action='store_true', help="test")
 
 args = parser.parse_args()
-
-#delay = float(args.integers[0])
 
 tm = tm1637.TM1637(clk=26, dio=19)                              # clk and dio need to be changes according to you pin usage
 dhtDevice = adafruit_dht.DHT22(board.D17, use_pulseio=False)    # "(board.D15) needs to be changed according to your pin usage)
