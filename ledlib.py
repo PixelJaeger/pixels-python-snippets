@@ -408,4 +408,4 @@ with neopixel.NeoPixel(board.D21, pixel_count) as pixels:
     
         if args.raibbowcycle:
             while True:
-                rainbow_cycle()
+                rainbow_cycle(0.01)
