@@ -8,26 +8,10 @@ ie.: sudo python3 this_script.py
 # importing necessary stuff
 import random, board, neopixel
 from time import sleep
-import argparse
 
 # importing for clean closure on reboot/shutdown otherwise
 # the LED will stay on until disconnected manually
 import sys, signal
-
-# argsparse stuff
-parser = argparse.ArgumentParser()
-parser.add_argument('-a', '--all', action='store_true', help="full animation-cycle")
-parser.add_argument('-b', '--chase', action='store_true', help="chase animattion")
-parser.add_argument('-c', '--twopoint', action='store_true', help="two-point chase")
-parser.add_argument('-d', '--fourpoint', action='store_true', help="four-point chase")
-parser.add_argument('-e', '--circlefill', action='store_true', help="fills circle constantly")
-parser.add_argument('-f', '--circlefillcleara', action='store_true', help="fills and clears circle variant a")
-parser.add_argument('-g', '--circlefillclearb', action='store_true', help="fills and clears circle variant b")
-parser.add_argument('-k', '--rndcolor', action='store_true', help="fills spots randomly with main colors")
-parser.add_argument('-i', '--rndpastel', action='store_true', help="fills spots randomly with pastel colors")
-parser.add_argument('-l', '--circlepulse', action='store_true', help="pulse animation")
-parser.add_argument('-m', '--raibbowcycle', action='store_true', help="Taste the rainbow")
-args = parser.parse_args()
 
 # pixel_pin = board.D21    # which GPIO-Pin is used
 
@@ -347,65 +331,18 @@ for sig in [signal.SIGTERM, signal.SIGINT, signal.SIGHUP, signal.SIGQUIT]:
 with neopixel.NeoPixel(board.D21, pixel_count) as pixels:
     pixels.brightness=orig_bright
     while True:
-
-
-
-
 ############################################
 # comment / uncomment the functions below  #
 # depending on your liking                 #
 ############################################
-
-        if args.all:
-            while True:
-                circle_nofill()
-                chase()
-                twopoint()
-                fourpoint()
-                circle_fill()
-                circle_fillandclear()
-                circle_fillandclear_b()
-                rnd_color()
-                rnd_pastel()
-                circle_pulse()
-                rainbow_cycle(0.01)
-    
-        if args.chase:
-            while True:
-                chase()
-    
-        if args.twopoint:
-            while True:
-                twopoint()
-    
-        if args.fourpoint:
-            while True:
-                fourpoint()
-    
-        if args.circlefill:
-            while True:
-                circle_fill()
-    
-        if args.circlefillcleara:
-            while True:
-                circle_fillandclear()
-    
-        if args.circlefillclearb:
-            while True:
-                circle_fillandclear_b()
-    
-        if args.rndcolor:
-            while True:
-                rnd_color()
-    
-        if args.rndpastel:
-            while True:
-                rnd_pastel()
-    
-        if args.circlepulse:
-            while True:
-                circle_pulse()
-    
-        if args.raibbowcycle:
-            while True:
-                rainbow_cycle(0.01)
+#        circle_nofill()
+        chase()
+        twopoint()
+        fourpoint()
+        circle_fill()
+        circle_fillandclear()
+        circle_fillandclear_b()
+        rnd_color()
+        rnd_pastel()
+        circle_pulse()
+        rainbow_cycle(0.01)
